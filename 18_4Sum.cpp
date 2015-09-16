@@ -1,7 +1,7 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
+// worst case n^3, but with much better test results
 vector<vector<int>> fourSum(vector<int>& nums, int target) {
 	vector<vector<int>> ret;
 	if(nums.size()<4) return ret;
