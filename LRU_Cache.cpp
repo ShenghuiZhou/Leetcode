@@ -17,10 +17,8 @@ class LRUCache {
 		int get(int key) {
 			auto iter = m.find(key);
 			if(iter==m.end()) return -1;
-			auto ret = iter->second->second;
 			l.splice(l.begin(),l,iter->second);
-			m[key] = l.begin();
-			return ret;
+			return l.front().second;
 		}
 
 		void set(int key, int val) {
@@ -28,7 +26,6 @@ class LRUCache {
 			if(iter!=m.end()) {
 				l.splice(l.begin(),l,iter->second);
 				l.begin()->second = val;
-				m[key] = l.begin();
 			}
 			else {
 				if(m.size()==cap) {
