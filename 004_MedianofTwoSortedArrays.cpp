@@ -22,6 +22,22 @@ int findKth(I b1, I e1, I b2, I e2, int k) {
 	else return findKth(next(iter1),e1,b2,e2,k-i1);
 }
 
+template<typename I>
+int findKth_II(I a, int m, I b, int n, int k) {
+	if(m>n) return findKth_II(b,n,a,m,k);
+	if(m==0) return *(b+k-1);
+	if(k==1) return min(*a,*b);
+
+	int ia = min(k/2,m);
+	int ib = k - ia;
+	int va = *(a+ia-1);
+	int vb = *(b+ib-1);
+
+	if(va==vb) return va;
+	else if(va<vb) return findKth_II(a+ia,m-ia,b,n,k-ia);
+	else return findKth_II(a,m,b+ib,n-ib,k-ib);
+}
+
 double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
 	const auto N = nums1.size() + nums2.size();
 	if (N & 1) //odd
